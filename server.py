@@ -153,6 +153,11 @@ async def leave_agent(req: LeaveAgentReqConfig):
 # --- END NEW/MODIFIED ENDPOINT ---
 
 
+@app.get("/test")
+async def test():
+    return {"message": "Server is running!"}
+
+
 if __name__ == "__main__":
     # The uvicorn.run in the original question was "main:app" and port 8001
     # Assuming the file is named main.py
