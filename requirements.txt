@@ -1,0 +1,7 @@
+aiohttp
+videosdk-agents
+videosdk-plugins-openai
+videosdk-plugins-google
+uvicorn
+fastapi
+python-dotenv

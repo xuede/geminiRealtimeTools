@@ -1,0 +1,36 @@
+*.env
+*__pycache__
+*.pyc
+*.pyo
+*.pyd
+*.pyw
+*.pyz
+
+.venv
+
+.DS_Store
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+client/node_modules
+client/dist
+client/dist-ssr
+client/*.local
+client/*.env
+# Editor directories and files
+client/.vscode/*
+!.vscode/extensions.json
+client/.idea
+client/.DS_Store
+client/*.suo
+client/*.ntvs*
+client/*.njsproj
+client/*.sln
+client/*.sw?
