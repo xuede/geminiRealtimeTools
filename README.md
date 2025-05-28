@@ -1,6 +1,6 @@
 # AI Voice Agent - Intelligent Real-Time Communication Platform
 
-![AI Voice Agent Interface](https://strapi.videosdk.live/uploads/Screenshot_2025_05_28_at_1_20_50_PM_8f9f7bc474.png)
+![AI Voice Agent Interface](https://strapi.videosdk.live/uploads/ai_agent_demo_86ae1b7d09.png)
 
 A powerful **AI voice agent** platform that combines the intelligence of **AI agents LLM** with real-time voice communication capabilities. Build sophisticated voice-enabled applications for customer service, sales automation, and interactive assistants.
 
