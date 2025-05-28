@@ -8,7 +8,7 @@ import uvicorn
 from dotenv import load_dotenv
 import asyncio
 from typing import Dict
-
+import traceback
 
 load_dotenv()
 
@@ -36,7 +36,7 @@ class MyVoiceAgent(Agent):
         self.personality = personality
 
     async def on_enter(self) -> None:
-        await self.session.say(f"Hello, I'm your {self.personality}, how can I help you today?")
+        await self.session.say(f"Hey, How can I help you today?")
     
     async def on_exit(self) -> None:
         await self.session.say("Goodbye!")
