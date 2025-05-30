@@ -22,7 +22,7 @@ export const MeetingContainer: React.FC<MeetingContainerProps> = ({
       agentSettings={agentSettings}
       onSettingsChange={onSettingsChange}
     >
-      <div className="flex flex-col items-center justify-between h-[50%]">
+      <div className="flex flex-col items-center justify-between min-h-[400px] w-[300px] h-[50%]">
         {/* Agent Avatar with Wave Animation */}
         <WaveAvatar isConnected={false} className="mb-8" />
 

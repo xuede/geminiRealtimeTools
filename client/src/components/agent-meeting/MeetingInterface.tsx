@@ -257,7 +257,7 @@ export const MeetingInterface: React.FC<MeetingInterfaceProps> = ({
       agentSettings={agentSettings}
       onSettingsChange={onSettingsChange}
     >
-      <div className="flex flex-col items-center justify-between h-[50%]">
+      <div className="flex flex-col items-center justify-between min-h-[400px] w-[300px] h-[50%]">
         {/* Agent Avatar with Wave Animation */}
         <WaveAvatar
           participantId={agentParticipant?.id}
@@ -302,7 +302,7 @@ export const MeetingInterface: React.FC<MeetingInterfaceProps> = ({
 
       {/* Agent Audio Player */}
       {agentParticipant && (
-        <div className="mt-8 w-full max-w-md">
+        <div>
           <AgentAudioPlayer participantId={agentParticipant.id} />
         </div>
       )}
