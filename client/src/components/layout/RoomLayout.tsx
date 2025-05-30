@@ -1,4 +1,3 @@
-
 import React from "react";
 import { AgentSettings } from "../agent-meeting/types";
 import { AgentConfiguration } from "../agent-meeting/AgentConfiguration";
@@ -20,8 +19,8 @@ export const RoomLayout: React.FC<RoomLayoutProps> = ({
   return (
     <div className="h-screen bg-black flex flex-col">
       {/* Content Section - Responsive container */}
-      <div className="flex flex-1 justify-center">
-        <div className="w-full max-w-7xl flex h-full">
+      <div className="flex flex-col bg-pink-400 mx-auto w-full max-w-7xl h-full flex-1 justify-center">
+        <div className="w-full h-full flex">
           {/* Desktop Agent Configuration - Hidden on mobile/tablet */}
           <div className="hidden lg:block w-[400px] bg-[#161616]">
             <AgentConfiguration
@@ -43,10 +42,9 @@ export const RoomLayout: React.FC<RoomLayoutProps> = ({
             </div>
           </div>
         </div>
+        {/* Footer - Full width */}
+        <Footer />
       </div>
-
-      {/* Footer - Full width */}
-      <Footer />
 
       {/* Mobile/Tablet Responsive Agent Configuration */}
       <div className="lg:hidden">
