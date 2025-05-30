@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { MeetingProvider } from "@videosdk.live/react-sdk";
-import { toast } from "@/hooks/use-toast";
 import { AgentSettings, VITE_VIDEOSDK_TOKEN } from "./agent-meeting/types";
 import { MeetingInterface } from "./agent-meeting/MeetingInterface";
 import { MeetingContainer } from "./agent-meeting/MeetingContainer";
@@ -36,10 +35,7 @@ const AgentMeeting: React.FC = () => {
         const data = await response.json();
         console.log("Meeting created successfully:", data);
         setMeetingId(data.roomId);
-        toast({
-          title: "Meeting Created",
-          description: `Meeting ID: ${data.roomId}`,
-        });
+        console.log("meeting created with ID:", data.roomId);
         return data.roomId;
       } else {
         const errorData = await response.text();
@@ -48,14 +44,6 @@ const AgentMeeting: React.FC = () => {
       }
     } catch (error) {
       console.error("Error creating meeting:", error);
-      toast({
-        title: "Error",
-        description:
-          error instanceof Error
-            ? error.message
-            : "Failed to create meeting. Please try again.",
-        variant: "destructive",
-      });
       throw error;
     }
   };
