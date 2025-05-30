@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { AgentSettings } from "./types";
@@ -25,10 +24,7 @@ export const MeetingContainer: React.FC<MeetingContainerProps> = ({
     >
       <div className="flex flex-col items-center justify-between h-[50%]">
         {/* Agent Avatar with Wave Animation */}
-        <WaveAvatar 
-          isConnected={false}
-          className="mb-8"
-        />
+        <WaveAvatar isConnected={false} className="mb-8" />
 
         {/* Control Panel */}
         <div className="flex items-center space-x-6">
