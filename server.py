@@ -1,15 +1,16 @@
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi import FastAPI, BackgroundTasks
 from pydantic import BaseModel
-from videosdk.agents import Agent, AgentSession, RealTimePipeline, function_tool
+from videosdk.agents import Agent, AgentSession, RealTimePipeline, function_tool, MCPServerStdio, MCPServerHTTP
 from videosdk.plugins.google import GeminiRealtime, GeminiLiveConfig
 import os
+import sys
 import uvicorn
 from dotenv import load_dotenv
 import asyncio
 from typing import Dict
 import traceback
-
+from pathlib import Path
 load_dotenv()
 
 port = int(os.getenv("PORT", 8000)) # Use environment variable for port, default to 8000
@@ -30,8 +31,21 @@ active_sessions: Dict[str, AgentSession] = {}
 
 class MyVoiceAgent(Agent):
     def __init__(self, system_prompt: str, personality: str):
+        # mcp_script = Path(__file__).parent / "mcp_studio.py"
+        mcp_script_weather = Path(__file__).parent / "mcp_weather.py"
+        # mcp_servers = [
+        #     MCPServerStdio(
+        #     command=sys.executable,
+        #     args=[str(mcp_script_weather)],
+        #     client_session_timeout_seconds=30
+        # ),
+        #     MCPServerHTTP(
+        #         url=os.getenv("ZAPIER_WEBHOOK_URL")
+        #     )
+        # ]
         super().__init__(
             instructions=system_prompt,
+            # mcp_servers=mcp_servers
         )
         self.personality = personality
 
@@ -69,6 +83,7 @@ async def server_operations(req: MeetingReqConfig):
     print(f"req body : {req}")
     meeting_id = req.meeting_id
     print(f"[{meeting_id}] Initializing agent operations...")
+    
 
     # Use all values from the request
     model = GeminiRealtime(

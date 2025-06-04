@@ -5,3 +5,5 @@ videosdk-plugins-google
 uvicorn
 fastapi
 python-dotenv
+fastmcp
+httpx
