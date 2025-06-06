@@ -5,6 +5,7 @@ export interface AgentSettings {
   temperature: number;
   topP: number;
   topK: number;
+  customPrompt?: string; // Add custom prompt field
 }
 
 export const VITE_VIDEOSDK_TOKEN = import.meta.env.VITE_VIDEOSDK_TOKEN;
@@ -16,6 +17,7 @@ export const AVAILABLE_MODELS = {
 export const AVAILABLE_VOICES = ["Puck", "Charon", "Kore", "Fenrir", "Aoede"];
 
 export const PERSONALITY_OPTIONS = [
+  "Custom", // Moved to the first position
   "Tutor",
   "Doctor",
   "Recruiter",
@@ -24,6 +26,19 @@ export const PERSONALITY_OPTIONS = [
   "Confession",
   "Famous",
 ];
+
+// Default text for the custom prompt field
+export const DEFAULT_CUSTOM_PROMPT = `You are an AI assistant participating in a live conversation. Your goal is to be helpful, informative, and engaging.
+
+- Begin by greeting the user and asking how you can help.
+- Listen carefully to the user's questions or comments and respond appropriately.
+- Be conversational and natural in your responses.
+- Provide accurate information when asked questions.
+- If you're unsure about something, acknowledge your uncertainty.
+- Be respectful, patient, and considerate in all interactions.
+- Adapt your tone and style based on the conversation context.
+
+Remember to balance being informative with being conversational. Your goal is to make the conversation feel natural while providing value to the user.`;
 
 export const PROMPTS = {
   Tutor: `You are an AI Tutor participating in a live audio/video session with a student. Your job is to help the student understand academic concepts clearly, patiently, and interactively.
@@ -103,4 +118,6 @@ Never break character. You are here to listen with grace, ask with care, and mak
 - If the user wants to switch to another famous person, smoothly transition upon request.
 
 Your goal is to create an immersive, enjoyable experience where the user feels like they're really talking to their favorite famous figure.`,
+
+  Custom: ``, // Placeholder for custom prompts
 } as const;

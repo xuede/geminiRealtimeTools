@@ -1,6 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { MeetingProvider } from "@videosdk.live/react-sdk";
-import { AgentSettings, VITE_VIDEOSDK_TOKEN } from "./agent-meeting/types";
+import {
+  AgentSettings,
+  VITE_VIDEOSDK_TOKEN,
+  DEFAULT_CUSTOM_PROMPT,
+} from "./agent-meeting/types";
 import { MeetingInterface } from "./agent-meeting/MeetingInterface";
 import { MeetingContainer } from "./agent-meeting/MeetingContainer";
 
@@ -15,7 +19,36 @@ const AgentMeeting: React.FC = () => {
     temperature: 0.8,
     topP: 0.8,
     topK: 0.8,
+    customPrompt: "", // Default empty custom prompt
   });
+
+  // Store initial personality selection
+  useEffect(() => {
+    // If the personality is Custom, ensure we keep it that way across re-renders
+    const savedPersonality = localStorage.getItem("selectedPersonality");
+    if (savedPersonality === "Custom") {
+      const savedPrompt = localStorage.getItem("customPrompt");
+      setAgentSettings((prev) => ({
+        ...prev,
+        personality: "Custom",
+        customPrompt: savedPrompt || DEFAULT_CUSTOM_PROMPT, // Use saved prompt or default
+      }));
+    }
+  }, []);
+
+  // Save personality selection when it changes
+  useEffect(() => {
+    if (agentSettings.personality === "Custom") {
+      localStorage.setItem("selectedPersonality", "Custom");
+      localStorage.setItem(
+        "customPrompt",
+        agentSettings.customPrompt || DEFAULT_CUSTOM_PROMPT
+      );
+    } else {
+      localStorage.removeItem("selectedPersonality");
+      localStorage.removeItem("customPrompt");
+    }
+  }, [agentSettings.personality, agentSettings.customPrompt]);
 
   const createMeeting = async () => {
     try {

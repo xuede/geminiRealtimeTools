@@ -212,9 +212,17 @@ export const MeetingInterface: React.FC<MeetingInterfaceProps> = ({
     try {
       console.log("Sending agent settings:", agentSettings);
 
-      // Get the system prompt for the selected personality
-      const systemPrompt =
-        PROMPTS[agentSettings.personality as keyof typeof PROMPTS];
+      // Determine which prompt to use
+      let systemPrompt: string;
+
+      if (agentSettings.personality === "Custom") {
+        // Use custom prompt if Custom personality is selected
+        systemPrompt = agentSettings.customPrompt || "";
+      } else {
+        // Use predefined prompt for the selected personality
+        systemPrompt =
+          PROMPTS[agentSettings.personality as keyof typeof PROMPTS];
+      }
 
       const response = await fetch(`${VITE_API_URL}/join-agent`, {
         method: "POST",
@@ -227,7 +235,7 @@ export const MeetingInterface: React.FC<MeetingInterfaceProps> = ({
           model: agentSettings.model,
           voice: agentSettings.voice,
           personality: agentSettings.personality,
-          system_prompt: systemPrompt,
+          system_prompt: systemPrompt, // Use the determined prompt
           temperature: agentSettings.temperature,
           topP: agentSettings.topP,
           topK: agentSettings.topK,

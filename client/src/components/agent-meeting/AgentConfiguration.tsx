@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Slider } from "@/components/ui/slider";
+import { Textarea } from "@/components/ui/textarea";
 import {
   AgentSettings,
   AVAILABLE_MODELS,
   AVAILABLE_VOICES,
   PERSONALITY_OPTIONS,
   PROMPTS,
+  DEFAULT_CUSTOM_PROMPT,
 } from "./types";
 import { ChevronRight, ArrowLeft } from "lucide-react";
 
@@ -22,17 +24,45 @@ export const AgentConfiguration: React.FC<AgentConfigurationProps> = ({
   const [voiceDropdownOpen, setVoiceDropdownOpen] = useState(false);
   const [personalityDropdownOpen, setPersonalityDropdownOpen] = useState(false);
   const [selectedPersonality, setSelectedPersonality] = useState<string | null>(
-    null
+    agentSettings.personality === "Custom" ? "Custom" : null
   );
+
+  // Use effect to sync the selected personality with the agent settings
+  useEffect(() => {
+    if (agentSettings.personality === "Custom") {
+      setSelectedPersonality("Custom");
+    }
+  }, [agentSettings.personality]);
 
   const handlePersonalitySelect = (personality: string) => {
     setSelectedPersonality(personality);
     setPersonalityDropdownOpen(false);
-    onSettingsChange?.({ ...agentSettings, personality });
+
+    // If selecting Custom personality, initialize with default text if custom prompt is empty
+    if (
+      personality === "Custom" &&
+      (!agentSettings.customPrompt || agentSettings.customPrompt.trim() === "")
+    ) {
+      onSettingsChange?.({
+        ...agentSettings,
+        personality,
+        customPrompt: DEFAULT_CUSTOM_PROMPT,
+      });
+    } else {
+      onSettingsChange?.({ ...agentSettings, personality });
+    }
   };
 
   const handleBackToPersonality = () => {
     setSelectedPersonality(null);
+    if (agentSettings.personality === "Custom") {
+      // If currently using custom personality, switch back to a default one
+      onSettingsChange?.({ ...agentSettings, personality: "Tutor" });
+    }
+  };
+
+  const handleCustomPromptChange = (value: string) => {
+    onSettingsChange?.({ ...agentSettings, customPrompt: value });
   };
 
   if (selectedPersonality) {
@@ -54,11 +84,29 @@ export const AgentConfiguration: React.FC<AgentConfigurationProps> = ({
         </div>
 
         <div className="px-4 py-6 h-full overflow-y-auto">
-          <div className="bg-[#1F1F1F] border border-[#232323] rounded-lg p-4">
-            <pre className="text-white text-sm leading-relaxed whitespace-pre-wrap font-sans">
-              {PROMPTS[selectedPersonality as keyof typeof PROMPTS]}
-            </pre>
-          </div>
+          {selectedPersonality === "Custom" ? (
+            <div className="bg-[#1F1F1F] border border-[#232323] rounded-lg p-4">
+              <label className="block text-white text-sm font-medium mb-2">
+                Custom Prompt
+              </label>
+              <Textarea
+                value={agentSettings.customPrompt || ""}
+                onChange={(e) => handleCustomPromptChange(e.target.value)}
+                placeholder="Enter your custom prompt here..."
+                className="w-full h-64 bg-[#161616] border border-[#232323] text-white text-sm leading-relaxed resize-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+              />
+              <p className="text-xs text-gray-400 mt-2">
+                Provide detailed instructions for how the AI should behave and
+                respond.
+              </p>
+            </div>
+          ) : (
+            <div className="bg-[#1F1F1F] border border-[#232323] rounded-lg p-4">
+              <pre className="text-white text-sm leading-relaxed whitespace-pre-wrap font-sans">
+                {PROMPTS[selectedPersonality as keyof typeof PROMPTS]}
+              </pre>
+            </div>
+          )}
         </div>
       </div>
     );
