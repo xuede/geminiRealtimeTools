@@ -1,22 +1,25 @@
-# AI Voice Agent - Intelligent Real-Time Communication Platform
+<div align="center">
+
+# VideoSDK AI Agent Demo
+
+<div align="left">
+
+A powerful <b>AI Agent Demo</b> playground that combines the intelligence of <b>AI agents LLM</b> with real-time <b>speech-to-speech</b> models integration. Build sophisticated voice-enabled applications for customer service, sales automation, and interactive assistants.
+
+</div>
+<div align="center">
+
+<a href="https://docs.videosdk.live/ai_agents/introduction" target="_blank"><img src="https://img.shields.io/badge/_Documentation-4285F4?style=for-the-badge" alt="Documentation"></a>
+<a href="https://www.youtube.com/playlist?list=PLrujdOR6BS_1fMqsHd9tynAg0foSRX5ti" target="_blank"><img src="https://img.shields.io/badge/_Tutorials-FF0000?style=for-the-badge&logo=youtube&logoColor=white" alt="Video Tutorials"></a>
+<a href="https://dub.sh/o59dJJB" target="_blank"><img src="https://img.shields.io/badge/_Get_Started-4285F4?style=for-the-badge" alt="Get Started"></a>
+<a href="https://discord.gg/f2WsNDN9S5" target="_blank"><img src="https://img.shields.io/badge/_Discord-5865F2?style=for-the-badge&logo=discord&logoColor=white" alt="Discord Community"></a>
+<a href="https://pypi.org/project/videosdk-agents/" target="_blank"><img src="https://img.shields.io/badge/_pip_install-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="PyPI Package"></a>
 
 ![AI Voice Agent Interface](https://strapi.videosdk.live/uploads/ai_agent_demo_86ae1b7d09.png)
 
-A powerful **AI voice agent** platform that combines the intelligence of **AI agents LLM** with real-time voice communication capabilities. Build sophisticated voice-enabled applications for customer service, sales automation, and interactive assistants.
+</div>
 
-## Features
-
-- **Advanced AI Voice Agent**: Powered by Google's Gemini Live model
-- **Real-Time Voice Communication**: Seamless audio processing with VideoSDK
-- **Customizable Personality**: Configure voice, tone, and behavior
-- **AI Outbound Calling**: Perfect for automated sales and support calls
-- **AI Cold Calling**: Intelligent conversation starters and follow-ups
-- **AI Voice Creator**: Generate voices from samples with various personalities
-- **AI Voicemail Generator Free**: Automated voicemail creation and responses
-- **AI Executive Assistant**: Handle scheduling, reminders, and administrative tasks
-- **Goal Based Agent**: Configure agents with specific objectives and KPIs
-- **News Reporter Text to Speech**: Professional broadcasting voice capabilities
-- **Text to Speech Old Man**: Various voice profiles including elderly personas
+</div>
 
 ## Technology Stack
 
@@ -108,14 +111,14 @@ cp .env.example .env
 #### Edit .env file and add your credentials:
 
 ```bash
-GOOGLE_API_KEY="your-google-api-key-here"
+GOOGLE_API_KEY="" # https://aistudio.google.com/apikey
 PORT="8000" # (Optional)
 ```
 
 #### Start the server
 
 ```bash
-python server.py
+uvicorn server:app --port 8001 --reload
 ```
 
 ## Client Setup
@@ -143,14 +146,14 @@ cp .env.example .env
 #### Edit .env file and add:
 
 ```bash
-# VITE_VIDEOSDK_TOKEN="your-videosdk-token-from-app.videosdk.live"
-# VITE_API_URL="http://localhost:8000"  # or your server URL
+VITE_VIDEOSDK_TOKEN="" # https://app.videosdk.live/
+VITE_API_URL="<ngrok url: ngrok http 8001(server port)>"  # or your server URL
 ```
 
 #### If testing with local server, use ngrok:
 
 ```bash
-ngrok http 8000
+ngrok http 8001
 ```
 
 - Then use the ngrok URL in `VITE_API_URL`
@@ -220,6 +223,19 @@ Content-Type: application/json
   "meeting_id": "your-meeting-id"
 }
 ```
+
+## Features
+
+- **Real-Time Voice Communication**: Seamless audio processing with VideoSDK
+- **Customizable Personality**: Configure voice, tone, and behavior
+- **AI Outbound Calling**: Perfect for automated sales and support calls
+- **AI Cold Calling**: Intelligent conversation starters and follow-ups
+- **AI Voice Creator**: Generate voices from samples with various personalities
+- **AI Voicemail Generator Free**: Automated voicemail creation and responses
+- **AI Executive Assistant**: Handle scheduling, reminders, and administrative tasks
+- **Goal Based Agent**: Configure agents with specific objectives and KPIs
+- **News Reporter Text to Speech**: Professional broadcasting voice capabilities
+- **Text to Speech Old Man**: Various voice profiles including elderly personas
 
 ## Key Components
 
