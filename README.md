@@ -1,6 +1,6 @@
 <div align="center">
 
-# VideoSDK AI Agent Demo
+# Gemini Realtime Speech to Speech with MCP
 
 <div align="left">
 
